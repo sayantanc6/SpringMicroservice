@@ -34,7 +34,7 @@ public class CallDetailsEntity {
 		return calledBy;
 	}
 
-	public void setCalledBy(Long calledBy) {
+	public void setCalledBy(Long calledBy) { 
 		this.calledBy = calledBy;
 	}
 

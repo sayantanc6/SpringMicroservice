@@ -71,7 +71,7 @@ public class CustomerEntity {
 		this.password = password;
 	}
 
-	public Character getGender() {
+	public Character getGender() { 
 		return gender;
 	}
 
