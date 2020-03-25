@@ -1,0 +1,23 @@
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark bg-primary">
+  <mdb-navbar-brand>
+      <a class="navbar-brand" href="">Navbar</a>
+  </mdb-navbar-brand>
+  <links>
+      <ul class="navbar-nav">
+          <li class="nav-item active">
+              <a class="nav-link waves-light" [routerLink]="'/body'" mdbWavesEffect>body<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link waves-light" [routerLink]="'/template'" mdbWavesEffect>Template</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link waves-light" [routerLink]="'/reactive'" mdbWavesEffect>Reactive</a>
+          </li>
+      </ul>
+      <div class="form-inline waves-light navbar-nav ml-auto" mdbWavesEffect>
+        <div class="md-form my-0">
+          <input type="text" class="form-control mr-sm-2" [(ngModel)]="value" (keydown)="onPubish()" placeholder="publish">
+        </div>
+      </div>
+  </links>
+</mdb-navbar>

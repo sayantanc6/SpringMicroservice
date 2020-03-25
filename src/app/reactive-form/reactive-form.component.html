@@ -1,0 +1,24 @@
+<form [formGroup]="f" (ngSubmit)="onSubmit(f)">
+    <div class="form-group" formGroupName="group1">
+        <label for="firstName">firstName: </label>
+        <input type="text" class="form-control" id="firstName"
+        formControlName="firstName"
+        [ngClass]="{ 'is-invalid': f.controls.group1.controls.firstName.submitted &&
+         f.controls.group1.controls.firstName.invalid }">
+        <p *ngIf="f.get('group1.firstName').hasError('required') && 
+        f.controls.group1.controls.firstName.touched">firstName is required</p>
+        <p *ngIf="f.get('group1.firstName').hasError('minlength')">minimum length is 3 characters</p>
+        <p *ngIf="f.get('group1.firstName').hasError('maxlength')">maximum length is 5 characters</p>
+
+        <label for="lastName">lastName: </label>
+        <input type="text" class="form-control" id="lastName"
+        formControlName="lastName"
+        [ngClass]="{ 'is-invalid': f.controls.group1.controls.lastName.submitted &&
+         f.controls.group1.controls.lastName.invalid }">
+        <p *ngIf="f.get('group1.lastName').hasError('required') &&
+        f.controls.group1.controls.lastName.touched">lastName is required</p>
+        <p *ngIf="f.get('group1.lastName').hasError('minlength')">minimum length is 3 characters</p>
+        <p *ngIf="f.get('group1.lastName').hasError('maxlength')">maximum length is 5 characters</p>
+    </div> 
+    <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+</form>
