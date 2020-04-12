@@ -4,8 +4,8 @@
         <input type="text" class="form-control" ngModel id="firstName"
         name="firstName" #firstName="ngModel"
         required minlength="3" maxlength="5"
-        [ngClass]="{ 'is-invalid': f.submitted && firstName.invalid }">
-        <p *ngIf="firstName.errors?.required && firstName.touched">firstName is required</p>
+        [ngClass]="{ 'is-invalid': firstName.invalid }">
+        <p *ngIf="firstName.errors?.required">firstName is required</p>
         <p *ngIf="firstName.errors?.minlength">minimum length is 3 characters</p>
         <p *ngIf="firstName.errors?.maxlength">maximum length is 5 characters</p>
 
@@ -13,8 +13,8 @@
         <input type="text" class="form-control" ngModel id="lastName"
         name="lastName" #lastName="ngModel"
         required minlength="3" maxlength="5"
-        [ngClass]="{ 'is-invalid': f.submitted && lastName.invalid }">
-        <p *ngIf="lastName.errors?.required && lastName.touched">lastName is required</p>
+        [ngClass]="{ 'is-invalid': lastName.invalid }">
+        <p *ngIf="lastName.errors?.required">lastName is required</p>
         <p *ngIf="lastName.errors?.minlength">minimum length is 3 characters</p>
         <p *ngIf="lastName.errors?.maxlength">maximum length is 5 characters</p>
     </div> 
