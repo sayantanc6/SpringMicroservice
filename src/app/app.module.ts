@@ -9,6 +9,7 @@ import { FooterComponent } from './footer/footer.component';
 import { TemplateFormComponent } from './template-form/template-form.component';
 import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FirstnameValidatorDirective } from './firstname-validator.directive';
 
 
 
@@ -19,7 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
     BodyComponent,
     FooterComponent,
     TemplateFormComponent,
-    ReactiveFormComponent
+    ReactiveFormComponent,
+    FirstnameValidatorDirective
   ],
   imports: [
     BrowserModule,
