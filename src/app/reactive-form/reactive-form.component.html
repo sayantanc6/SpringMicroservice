@@ -1,5 +1,13 @@
 <form [formGroup]="f" (ngSubmit)="onSubmit(f)">
     <div class="form-group" formGroupName="group1">
+      
+      <label for="email">email: </label>
+        <input type="email" class="form-control" id="email"
+        formControlName="email"
+        [ngClass]="{ 'is-invalid':  f.controls.group1.controls.email.invalid }">
+        <p *ngIf="f.get('group1.email').hasError('required')">email is required</p>
+        <p *ngIf="f.get('group1.email').hasError('email')">please enter a valid email address</p>
+        <p *ngIf="f.get('group1.email').hasError('emailDomain')">please enter a valid domain email address</p>
         <label for="firstName">firstName: </label>
         <input type="text" class="form-control" id="firstName"
         formControlName="firstName"
