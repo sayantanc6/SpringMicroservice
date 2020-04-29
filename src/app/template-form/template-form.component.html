@@ -2,12 +2,13 @@
     <div class="form-group" ngmodelgroup="group1">
         <label for="firstName">firstName: </label>
         <input type="text" class="form-control" ngModel id="firstName"
-        name="firstName" #firstName="ngModel"
+        name="firstName" #firstName="ngModel" appNameAllowed="sayantan"
         required minlength="3" maxlength="5"
         [ngClass]="{ 'is-invalid': firstName.invalid }">
         <p *ngIf="firstName.errors?.required">firstName is required</p>
         <p *ngIf="firstName.errors?.minlength">minimum length is 3 characters</p>
         <p *ngIf="firstName.errors?.maxlength">maximum length is 5 characters</p>
+        <p *ngIf="firstName.errors?.appNameAllowed">name allowed</p>
 
         <label for="lastName">lastName: </label>
         <input type="text" class="form-control" ngModel id="lastName"
@@ -17,6 +18,14 @@
         <p *ngIf="lastName.errors?.required">lastName is required</p>
         <p *ngIf="lastName.errors?.minlength">minimum length is 3 characters</p>
         <p *ngIf="lastName.errors?.maxlength">maximum length is 5 characters</p>
+      
+      <label for="email">Email: </label>
+        <input type="email" class="form-control" ngModel id="email"
+        name="email" #email="ngModel"
+        required pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+        [ngClass]="{ 'is-invalid': email.invalid }">
+        <p *ngIf="email.errors?.required">email is required</p>
+        <p *ngIf="email.errors?.pattern">please enter the valid email address</p>
     </div> 
     <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit</button>
 </form>
