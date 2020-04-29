@@ -18,11 +18,7 @@ export class FirstnameValidatorDirective implements Validator {
     const Allowed = new RegExp(this.nameAllowed).test(control.value);
     if(control.value == "")
       return null;
-    if (Allowed){
-      return null;
-    }else{
-      return {'appNameAllowed': true};
-    }
+    return Allowed? null : {'appNameAllowed': true};
   }
 
 }
