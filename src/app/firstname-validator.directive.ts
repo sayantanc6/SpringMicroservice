@@ -16,10 +16,12 @@ export class FirstnameValidatorDirective implements Validator {
   
   validate(control: AbstractControl): {[key: string]: any}| null {
     const Allowed = new RegExp(this.nameAllowed).test(control.value);
+    if(control.value == "")
+      return null;
     if (Allowed){
       return null;
     }else{
-      return {'appNameAllowed': false};
+      return {'appNameAllowed': true};
     }
   }
 
