@@ -1,0 +1,5 @@
+spring:
+  cloud:
+    config:
+      uri: http://infy1:1spring@localhost:1600
+      fail-fast: true

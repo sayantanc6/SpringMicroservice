@@ -1,0 +1,28 @@
+PlanMS:
+  ribbon:
+    listOfServers: http://localhost:1500
+server:
+  port: 1500
+spring:
+  application:
+    name: PlanMS
+  cache:
+    cache-names: planCache,allPlansCache
+    redis:
+      cache-null-values: false
+      time-to-live: 600000
+      use-key-prefix: true
+    type: redis
+  jackson:
+    default-property-inclusion: non-null 
+  redis:
+    host: 127.0.0.1
+    lettuce:
+      pool:
+        max-active: 7 
+        max-idle: 7
+        max-wait: -1ms
+        min-idle: 2
+      shutdown-timeout: 200ms
+    password: mypass
+    port: 6379
