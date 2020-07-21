@@ -1,0 +1,13 @@
+security:
+  oauth2:
+    client:
+      client-id: 
+      client-secret: 
+      access-token-uri: http://10.172.62.168/oauth/token
+      user-authorization-uri: http://10.172.62.168/oauth/authorize
+      client-authentication-scheme: form
+      
+    resource:      user-info-uri: http://10.172.62.168/api/v3/user
+      prefer-token-info: false
+      
+server:  port: 3333

@@ -1,0 +1,4 @@
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://infygit.ad.ifosys.com/v3/user
