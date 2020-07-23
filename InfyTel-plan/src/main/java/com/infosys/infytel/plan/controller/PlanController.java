@@ -1,6 +1,10 @@
 package com.infosys.infytel.plan.controller;
 
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,8 +39,14 @@ public class PlanController {
 	@RequestMapping(value = "/plans/{planID}",
 					method = RequestMethod.GET,
 					produces = MediaType.APPLICATION_JSON_VALUE)
-	public PlanDTO getSpecificPlans(@PathVariable Integer planID) {
+	public PlanDTO getSpecificPlans(@PathVariable Integer planID,HttpServletRequest request) {
+		System.out.println("PLAN REQUEST IS ===="+request);
+		Enumeration<String> en= request.getHeaderNames();
+		List<String> li= Collections.list(en);
+		System.out.println("HEADERS ARE ==="+li);
+		System.out.println("Auhorization is ====="+request.getHeader("Authorization"));
 		log.info("fetching details of plan {}",planID);
+		System.out.println("PLAN IS ===="+planService.getSpecificPlan(planID));
 		return planService.getSpecificPlan(planID);
 	}
 
