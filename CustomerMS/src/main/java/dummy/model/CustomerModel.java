@@ -2,6 +2,8 @@ package dummy.model;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import org.dozer.Mapping;
 import org.springframework.stereotype.Component;
 
@@ -17,9 +19,11 @@ public class CustomerModel implements Serializable{
 	@JsonProperty("PhoneNo")
 	private Long PhoneNo;
 	
+	@NotBlank(message = "phone must not be blank")
 	@JsonProperty("name")
 	private String name;
 	
+	@NotBlank(message = "age must not be blank")
 	@JsonProperty("age")
 	private Integer age;
 	
