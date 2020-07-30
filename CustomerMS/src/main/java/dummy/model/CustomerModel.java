@@ -19,7 +19,7 @@ public class CustomerModel implements Serializable{
 	@JsonProperty("PhoneNo")
 	private Long PhoneNo;
 	
-	@NotBlank(message = "phone must not be blank")
+	@NotBlank(message = "name must not be blank")
 	@JsonProperty("name")
 	private String name;
 	
