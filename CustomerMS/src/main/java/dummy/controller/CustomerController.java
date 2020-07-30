@@ -1,6 +1,9 @@
 package dummy.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -8,10 +11,13 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.lang.reflect.Field;
 
@@ -42,13 +48,25 @@ public class CustomerController {
 					produces = MediaType.APPLICATION_JSON_VALUE,
 					consumes = MediaType.APPLICATION_JSON_VALUE,
 					headers = "Accept=application/json")
-	public  CustomerModel addCustomer(@RequestBody CustomerModel cust) {
+	public  CustomerModel addCustomer(@Valid @RequestBody CustomerModel cust) {
 		System.out.println("inside addcust controller");
 		System.out.println(cust);
 		//System.out.println("after service call");
 		service.AddCustomer(cust);
 		
 		return cust;
+	}
+	
+	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public Map<String, String> addCustExceptions(MethodArgumentNotValidException ex){
+		Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        return errors;
 	}
 	
 	@Cacheable(value = "allCustomersCache",unless= "#result.size() == 0")
