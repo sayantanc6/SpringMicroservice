@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.jms.JmsException;
+import org.springframework.jms.core.JmsTemplate;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.lang.reflect.Field;
 
@@ -42,6 +46,11 @@ public class CustomerController {
 	@Autowired
 	CustomerPlanModel cpmodel;
 	
+	@Autowired
+	JmsTemplate template;
+	
+	@Autowired
+	Queue queue;
 
 	
 	@PostMapping(value = "/addCustomer",
@@ -50,6 +59,17 @@ public class CustomerController {
 					headers = "Accept=application/json")
 	public  CustomerModel addCustomer(@Valid @RequestBody CustomerModel cust) {
 		System.out.println("inside addcust controller");
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			String jsonString = mapper.writeValueAsString(cust);
+			System.out.println(jsonString);
+			template.convertAndSend(queue, jsonString);
+		} catch (JmsException e) {
+			System.out.println("JMSexception ->"+e);
+		} catch (JsonProcessingException e) {
+			System.out.println("JsonProcessingException ->"+e);
+		} 
+		System.out.println("successfully pushed into test-queue-->"+cust);
 		System.out.println(cust);
 		//System.out.println("after service call");
 		service.AddCustomer(cust);
