@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.jms.JmsException;
+import org.springframework.jms.core.JmsTemplate;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.jms.annotation.JmsListener;
 
 import dummy.model.PlanModel;
 import dummy.service.PlanService;
@@ -21,6 +26,9 @@ public class PlanController {
 	
 	@Autowired
 	PlanService service;
+	
+	@Autowired
+	JmsTemplate template;
 
 	@PostMapping(value = "/addplan",
 			produces = MediaType.APPLICATION_JSON_VALUE,
@@ -89,4 +97,17 @@ public class PlanController {
 		return service.findByPlanID(planID);
 	}
 	
+	@JmsListener(destination = "test-queue",containerFactory = "myFactory")
+	public void receiverMessage(String jsonInString) {
+    	ObjectMapper mapper = new ObjectMapper();
+    	CustomerModel cust;
+		try {
+			cust = mapper.readValue(jsonInString, CustomerModel.class);
+	    	System.out.println("received in test-queue -->"+cust);
+		} catch (JsonMappingException e) {
+			System.out.println("JsonMappingException->"+e);
+		} catch (JsonProcessingException e) {
+			System.out.println("JsonProcessingException->"+e);
+		}
+	}
 }
